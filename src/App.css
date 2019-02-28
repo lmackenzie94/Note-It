@@ -40,6 +40,7 @@ html {
 
 body {
   font-size: 1rem;
+  background: paleturquoise;
 }
 
 .wrapper {
@@ -52,7 +53,7 @@ body {
 
 header {
   background: #bada55;
-  padding: 30px 0;
+  padding: 15px 0;
 }
 
 .headerTitle {
@@ -60,11 +61,32 @@ header {
   text-transform: uppercase;
 }
 
+/* INPUTS SECTION STYLES */
+
+.inputs form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputs button {
+  width: 150px;
+}
+
+textarea {
+  resize: none;
+}
+
+.inputs form > * {
+  margin: 5px 0;
+}
+
 /* MAIN SECTION STYLES */
 
 main {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .singleNote {
@@ -72,5 +94,17 @@ main {
   width: 250px;
   height: 250px;
   margin: 25px 5px;
+  padding: 5px;
   box-shadow: 5px 5px 5px #999;
+  position: relative;
+  word-wrap: break-word;
+  background: #fff;
+}
+
+.delete {
+  position: absolute;
+  top: -4px;
+  right: 7px;
+  color: red;
+  font-size: 1.3rem;
 }
