@@ -139,3 +139,18 @@ main > div {
 .delete:hover {
   color: #fff;
 }
+
+.edit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #000;
+  font-size: 1.3rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.edit:hover {
+  color: #fff;
+}

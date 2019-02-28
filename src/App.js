@@ -11,7 +11,7 @@ class App extends Component {
     super();
     this.state = {
       notePad: [],
-      noteCategory: "",
+      noteCategory: "Personal",
       noteTitle: "",
       noteContent: ""
     }
@@ -72,13 +72,30 @@ class App extends Component {
 
   deleteNote = (noteId) => {
     const dbRef = firebase.database().ref('notes')
-    const bookToDelete = dbRef.child(noteId)
-    console.log(bookToDelete)
-    bookToDelete.remove();
+    const noteToDelete = dbRef.child(noteId)
+    console.log(noteToDelete)
+    noteToDelete.remove();
   }
 
-  // editNote = (noteId) => {
+  editNote = (noteId) => {
+    // const dbRef = firebase.database().ref('notes')
+    // const noteToEdit = dbRef.child(noteId)
+    // const noteToEditTitle = noteToEdit[noteTitle]
+    // console.log(noteToEditTitle)
+    // // this.setState({
+    // //   noteCategory: 
+    // //   noteTitle: this.state.noteTitle,
+    // //   noteContent: this.state.noteContent
+    // // })
+    // noteToEdit.set({
+    //   noteCategory: this.state.noteCategory,
+    //   noteTitle: this.state.noteTitle,
+    //   noteContent: this.state.noteContent
+    // });
+  }
 
+  // getEdits = () => {
+  //   editedCategory
   // }
 
 
