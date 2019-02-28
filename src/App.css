@@ -40,7 +40,7 @@ html {
 
 body {
   font-size: 1rem;
-  background: paleturquoise;
+  background: #f2f7ff;
 }
 
 .wrapper {
@@ -54,6 +54,7 @@ body {
 header {
   background: #bada55;
   padding: 15px 0;
+  margin-bottom: 20px;
 }
 
 .headerTitle {
@@ -89,7 +90,30 @@ main {
   flex-wrap: wrap;
 }
 
-.singleNote {
+main > div {
+  border: 2px solid #000;
+  width: 250px;
+  height: 250px;
+  margin: 25px 5px;
+  padding: 5px;
+  box-shadow: 5px 5px 5px #999;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.Personal {
+  background: palegoldenrod;
+}
+
+.Work {
+  background: paleturquoise;
+}
+
+.Other {
+  background: palevioletred;
+}
+
+/* .singleNote {
   border: 2px solid #000;
   width: 250px;
   height: 250px;
@@ -99,12 +123,19 @@ main {
   position: relative;
   word-wrap: break-word;
   background: #fff;
-}
+} */
 
 .delete {
   position: absolute;
-  top: -4px;
-  right: 7px;
-  color: red;
+  top: 0;
+  right: 0;
+  color: #000;
   font-size: 1.3rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.delete:hover {
+  color: #fff;
 }
