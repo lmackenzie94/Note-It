@@ -126,7 +126,7 @@ class App extends Component {
                 <input 
                   type="text" 
                   id="noteTitle" 
-                  placeholder="Note title..." 
+                  placeholder="Enter note title..." 
                   name="noteTitle" 
                   onChange={this.handleChange} 
                   value={this.state.noteTitle}

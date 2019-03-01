@@ -36,7 +36,7 @@ p {
 /* HEADER STYLES */
 
 header {
-  background: #bada55;
+  background: black;
   padding: 10px 0;
   /* margin-top: 20px; */
   box-shadow: 0 5px 5px #999;
@@ -49,6 +49,7 @@ header {
   margin: 0;
   text-transform: uppercase;
   font-family: 'Fredericka the Great', cursive;
+  color: white;
 }
 
 /* INPUTS SECTION STYLES */
@@ -58,8 +59,9 @@ header {
   flex-direction: column;
   align-items: center;
   background:#d6ebff;
-  border: 3px solid #000;
-  border-radius: 5px;
+  /* border-top: 3px solid #000;
+  border-bottom: 3px solid #000; */
+  border-radius: 3px;
   width: 50%;
   margin: 50px auto;
   padding: 15px;
@@ -74,15 +76,34 @@ header {
   margin: 5px 0;
 }
 
+.inputs select {
+  margin-right: 60px;
+  border: 2px solid transparent;
+}
+
+.inputs input {
+  border: 2px solid transparent;
+}
+
 .inputs textarea {
   resize: none;
   font-family: 'Roboto', sans-serif;
   padding: 15px;
   margin: 15px 0;
+  border: 2px solid transparent;
 }
 
 .inputsSection {
   display: flex;
+}
+
+*:required {
+  border: none;
+  box-shadow: none;
+}
+
+*:required:focus {
+  border: 2px solid #000;
 }
 
 /* MAIN SECTION STYLES */
