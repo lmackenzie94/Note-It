@@ -13,7 +13,8 @@ class App extends Component {
       notePad: [],
       noteCategory: "Personal",
       noteTitle: "",
-      noteContent: ""
+      noteContent: "",
+      editMode: false
     }
   }
 
@@ -60,6 +61,7 @@ class App extends Component {
     this.setState({
       noteContent: "", //reset userNote after each submission
       noteTitle: "",
+      noteCategory: ""
     })
   }
 
@@ -77,27 +79,29 @@ class App extends Component {
     noteToDelete.remove();
   }
 
-  editNote = (noteId) => {
-    // const dbRef = firebase.database().ref('notes')
-    // const noteToEdit = dbRef.child(noteId)
-    // const noteToEditTitle = noteToEdit[noteTitle]
-    // console.log(noteToEditTitle)
-    // // this.setState({
-    // //   noteCategory: 
-    // //   noteTitle: this.state.noteTitle,
-    // //   noteContent: this.state.noteContent
-    // // })
-    // noteToEdit.set({
-    //   noteCategory: this.state.noteCategory,
-    //   noteTitle: this.state.noteTitle,
-    //   noteContent: this.state.noteContent
-    // });
+  editNote = (noteId, currentNoteCategory, currentNoteTitle, currentNoteContent) => {
+    alert('Please make necessary edits in the form');
+    const dbRef = firebase.database().ref('notes')
+    const noteToEdit = dbRef.child(noteId)
+    this.setState({
+      noteCategory: currentNoteCategory,
+      noteTitle: currentNoteTitle,
+      noteContent: currentNoteContent,
+      editMode: true
+    })
+    noteToEdit.set({
+      noteCategory: this.state.noteCategory,
+      noteTitle: this.state.noteTitle,
+      noteContent: this.state.noteContent
+    });
   }
 
-  // getEdits = () => {
-  //   editedCategory
-  // }
+  handleEditSubmit = (e) => {
+    e.preventDefault();
+  }
 
+  // create a state called edit mode and use true/false conditional rendering
+  // hide Post button, show Edit button that runs new function
 
   render() {
     return (
@@ -143,6 +147,9 @@ class App extends Component {
             </label>
 
             <button type="submit">Post Your Note!</button>
+            <button type="submit"
+              onClick={() => this.handleEditSubmit}>
+              Submit edit</button>
 
           </form>
         </section>
@@ -155,7 +162,9 @@ class App extends Component {
                   <h2>{note.noteTitle}</h2>
                   <p>{note.noteContent}</p>
                   <button className="delete" onClick={() => this.deleteNote(note.id)}>&times;</button>
-                  <button className="edit" onClick={() => this.editNote(note.id)}>&#9998;</button>
+                  <button className="edit" 
+                    onClick={() => this.editNote(note.id, note.noteCategory, note.noteTitle, note.noteContent)}>
+                    &#9998;</button>
                 </div>
               )
             })
