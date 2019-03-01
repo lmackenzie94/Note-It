@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import firebase from './firebase';
-import Header from './header';
+import Header from './Header';
+import Footer from './Footer';
+
 // import { FontAwesomeIcon } from '@fontawesome/react-fontawesome'
 // import { faCoffee } from '@fontawesome/free-solid-svg-icons'
 
@@ -49,7 +51,6 @@ class App extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(this.state.noteContent)
 
     const dbRef = firebase.database().ref('notes')
 
@@ -68,7 +69,7 @@ class App extends Component {
   }
 
   handleChange = (e) => {
-    console.log(e.target.value)
+    // console.log(e.target.value)
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -77,7 +78,6 @@ class App extends Component {
   deleteNote = (noteId) => {
     const dbRef = firebase.database().ref('notes')
     const noteToDelete = dbRef.child(noteId)
-    console.log(noteToDelete)
     noteToDelete.remove();
   }
 
@@ -97,7 +97,6 @@ class App extends Component {
     e.preventDefault();
     const dbRef = firebase.database().ref('notes')
     const noteToEdit = dbRef.child(this.state.noteIdToEdit)
-    console.log(noteToEdit)
 
     noteToEdit.set({
       noteCategory: this.state.noteCategory,
@@ -106,55 +105,51 @@ class App extends Component {
     });
   }
 
-  // create a state called edit mode and use true/false conditional rendering
-  // hide Post button, show Edit button that runs new function
-
   render() {
     return (
       <div className="App">
         <Header />
-        <section className="inputs">
+        <section className="inputs" id="top">
           <form action="submit" onSubmit={this.handleSubmit}>
 
             {/* CATEGORY DROPDOWN */}
-            <label htmlFor="noteCategory">Category:
-              <select name="noteCategory" id="noteCategory" value={this.state.noteCategory} onChange={this.handleChange} required>
-                <option value="Personal" defaultValue>Personal</option>
-                <option value="Work">Work</option>
-                <option value="Other">Other</option>
-              </select>
-            </label>
-
-            {/* NOTE TITLE INPUT */}
-            <label htmlFor="noteTitle">Note title:
-              <input 
-                type="text" 
-                id="noteTitle" 
-                placeholder="Note title..." 
-                name="noteTitle" 
-                onChange={this.handleChange} 
-                value={this.state.noteTitle}
-                required
-              />
-            </label>
-
+            <div className="inputsSection">
+              <label htmlFor="noteCategory" className="visuallyHidden">Pick a category:</label>
+                <select name="noteCategory" id="noteCategory" value={this.state.noteCategory} onChange={this.handleChange} required>
+                  <option value="Personal" defaultValue>Personal</option>
+                  <option value="Work">Work</option>
+                  <option value="Other">Other</option>
+                </select>
+              
+              {/* NOTE TITLE INPUT */}
+              <label htmlFor="noteTitle" className="visuallyHidden">Give your note a title:</label>
+                <input 
+                  type="text" 
+                  id="noteTitle" 
+                  placeholder="Note title..." 
+                  name="noteTitle" 
+                  onChange={this.handleChange} 
+                  value={this.state.noteTitle}
+                  required
+                />
+            </div>
+          
             {/* NOTE CONTENT INPUT */}
-            <label htmlFor="noteContent">
+            <label htmlFor="noteContent" className="visuallyHidden">Type your note</label>
               <textarea 
                 name="noteContent" 
                 id="noteContent" 
                 placeholder="Write your note..." 
                 cols="40" 
-                rows="10" 
+                rows="7" 
                 onChange={this.handleChange}
                 value={this.state.noteContent}
                 required>
               </textarea>
-            </label>
-
-            <button type="submit">Post Your Note!</button>
+            
+            <button type="submit">Note-It!</button>
             <button onClick={this.handleEditSubmit}>
-              Submit edit</button>
+              Submit Edit</button>
 
           </form>
         </section>
@@ -163,18 +158,22 @@ class App extends Component {
           {
             this.state.notePad.map((note) => {
               return (
-                <div className={note.noteCategory} key={note.id}>
+                <div className={note.noteCategory} tabindex="0" key={note.id}>
                   <h2>{note.noteTitle}</h2>
                   <p>{note.noteContent}</p>
+                  <a href="#top">
+                    <button className="edit"
+                      onClick={() => this.editNote(note.noteCategory, note.noteTitle, note.noteContent, note.id)}>
+                      &#9998;
+                    </button>
+                  </a>
                   <button className="delete" onClick={() => this.deleteNote(note.id)}>&times;</button>
-                  <button className="edit" 
-                    onClick={() => this.editNote(note.noteCategory, note.noteTitle, note.noteContent, note.id)}>
-                    &#9998;</button>
                 </div>
               )
             })
           }
         </main>
+        <Footer />
       </div>
     );
   }
