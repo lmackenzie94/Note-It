@@ -90,27 +90,47 @@ main {
   flex-wrap: wrap;
 }
 
+/* Post-it effect was adapted from: https://mentormate.com/blog/css-postit-note/ */
 main > div {
-  border: 2px solid #000;
+  height: 200px;
   width: 250px;
-  height: 250px;
-  margin: 25px 5px;
-  padding: 5px;
-  box-shadow: 5px 5px 5px #999;
-  position: relative;
+  margin: 20px 10px;
+  padding: 0px 10px 10px 10px;
+  border:1px solid #E8E8E8;
+  border-bottom-right-radius: 60px 5px;
+  position: relative; 
+  text-align: center;
+  display: inline-block;
   word-wrap: break-word;
+  font-family:'Reenie Beanie', cursive;
+  font-size: 1.2rem;
+}
+
+main > div:after {
+  content: "";
+  position:absolute;
+  z-index:-1;
+  right:-0px; bottom:20px;
+  width: 200px;
+  height: 25px;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow:2px 15px 5px rgba(0, 0, 0, 0.40);
+  transform: matrix(-1, -0.1, 0, 1, 0, 0);
 }
 
 .Personal {
-  background: palegoldenrod;
+  background: linear-gradient(135deg, #ffff88 81%,#ffff88  82%,#ffff88 82%,#ffffc6 100%);
+  border-top:60px solid #fdfd86;
 }
 
 .Work {
-  background: paleturquoise;
+  background: linear-gradient(135deg, #affbff 81%,#affbff  82%,#affbff 82%,#c2f9fc 100%);
+  border-top:60px solid #aafaff;
 }
 
 .Other {
-  background: palevioletred;
+  background: linear-gradient(135deg, #ffd5c9 81%,#ffd5c9  82%,#ffd5c9 82%,#ffe9e2 100%);
+  border-top:60px solid #ffd3c6;
 }
 
 /* .singleNote {
@@ -127,7 +147,7 @@ main > div {
 
 .delete {
   position: absolute;
-  top: 0;
+  top: -55px;
   right: 0;
   color: #000;
   font-size: 1.3rem;
@@ -142,15 +162,16 @@ main > div {
 
 .edit {
   position: absolute;
-  top: 0;
+  top: -55px;
   left: 0;
   color: #000;
   font-size: 1.3rem;
   background: transparent;
   border: none;
   cursor: pointer;
+  transition: all .2s linear;
 }
 
 .edit:hover {
-  color: #fff;
+  transform: rotate(20deg);
 }

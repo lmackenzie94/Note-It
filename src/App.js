@@ -14,7 +14,8 @@ class App extends Component {
       noteCategory: "Personal",
       noteTitle: "",
       noteContent: "",
-      editMode: false
+      editMode: false,
+      noteIdToEdit: ""
     }
   }
 
@@ -59,9 +60,10 @@ class App extends Component {
     })
   
     this.setState({
-      noteContent: "", //reset userNote after each submission
+      noteContent: "", //resets after each submission
       noteTitle: "",
-      noteCategory: ""
+      noteCategory: "Personal",
+      noteIdToEdit: ""
     })
   }
 
@@ -79,25 +81,29 @@ class App extends Component {
     noteToDelete.remove();
   }
 
-  editNote = (noteId, currentNoteCategory, currentNoteTitle, currentNoteContent) => {
+  editNote = (currentNoteCategory, currentNoteTitle, currentNoteContent, currentNoteId) => {
     alert('Please make necessary edits in the form');
-    const dbRef = firebase.database().ref('notes')
-    const noteToEdit = dbRef.child(noteId)
+
     this.setState({
       noteCategory: currentNoteCategory,
       noteTitle: currentNoteTitle,
       noteContent: currentNoteContent,
-      editMode: true
+      editMode: true,
+      noteIdToEdit: currentNoteId
     })
+  }
+
+  handleEditSubmit = (e) => {
+    e.preventDefault();
+    const dbRef = firebase.database().ref('notes')
+    const noteToEdit = dbRef.child(this.state.noteIdToEdit)
+    console.log(noteToEdit)
+
     noteToEdit.set({
       noteCategory: this.state.noteCategory,
       noteTitle: this.state.noteTitle,
       noteContent: this.state.noteContent
     });
-  }
-
-  handleEditSubmit = (e) => {
-    e.preventDefault();
   }
 
   // create a state called edit mode and use true/false conditional rendering
@@ -147,8 +153,7 @@ class App extends Component {
             </label>
 
             <button type="submit">Post Your Note!</button>
-            <button type="submit"
-              onClick={() => this.handleEditSubmit}>
+            <button onClick={this.handleEditSubmit}>
               Submit edit</button>
 
           </form>
@@ -163,7 +168,7 @@ class App extends Component {
                   <p>{note.noteContent}</p>
                   <button className="delete" onClick={() => this.deleteNote(note.id)}>&times;</button>
                   <button className="edit" 
-                    onClick={() => this.editNote(note.id, note.noteCategory, note.noteTitle, note.noteContent)}>
+                    onClick={() => this.editNote(note.noteCategory, note.noteTitle, note.noteContent, note.id)}>
                     &#9998;</button>
                 </div>
               )
