@@ -167,7 +167,7 @@ class App extends Component {
                       &#9998;
                     </button>
                   </a>
-                  <button className="delete" onClick={() => this.deleteNote(note.id)}>&times;</button>
+                  <button className="delete" onClick={() => this.deleteNote(note.id)}>X</button>
                 </div>
               )
             })
