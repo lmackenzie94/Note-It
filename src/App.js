@@ -3,9 +3,8 @@ import './App.css';
 import firebase from './firebase';
 import Header from './Header';
 import Footer from './Footer';
-
-// import { FontAwesomeIcon } from '@fontawesome/react-fontawesome'
-// import { faCoffee } from '@fontawesome/free-solid-svg-icons'
+import Form from './Form';
+import Notepad from './Notepad';
 
 class App extends Component {
   
@@ -110,67 +109,23 @@ class App extends Component {
       <div className="App">
         <Header />
         <section className="inputs" id="top">
-          <form action="submit" onSubmit={this.handleSubmit}>
-
-            {/* CATEGORY DROPDOWN */}
-            <div className="inputsSection">
-              <label htmlFor="noteCategory" className="visuallyHidden">Pick a category:</label>
-                <select name="noteCategory" id="noteCategory" value={this.state.noteCategory} onChange={this.handleChange} required>
-                  <option value="Personal" defaultValue>Personal</option>
-                  <option value="Work">Work</option>
-                  <option value="Other">Other</option>
-                </select>
-              
-              {/* NOTE TITLE INPUT */}
-              <label htmlFor="noteTitle" className="visuallyHidden">Give your note a title:</label>
-                <input 
-                  type="text" 
-                  id="noteTitle" 
-                  placeholder="Enter note title..." 
-                  name="noteTitle" 
-                  onChange={this.handleChange} 
-                  value={this.state.noteTitle}
-                  required
-                />
-            </div>
-          
-            {/* NOTE CONTENT INPUT */}
-            <label htmlFor="noteContent" className="visuallyHidden">Type your note</label>
-              <textarea 
-                name="noteContent" 
-                id="noteContent" 
-                placeholder="Write your note..." 
-                cols="40" 
-                rows="7" 
-                onChange={this.handleChange}
-                value={this.state.noteContent}
-                required>
-              </textarea>
-            
-            <button type="submit">Note-It!</button>
-            <button onClick={this.handleEditSubmit}>
-              Submit Edit</button>
-
-          </form>
+          <Form 
+            handleSubmit = {this.handleSubmit}
+            handleChange = {this.handleChange}
+            handleEditSubmit = {this.handleEditSubmit}
+            noteCategory = {this.state.noteCategory}
+            noteTitle = {this.state.noteTitle}
+            noteContent = {this.state.noteContent}
+          />
         </section>
 
         <main className="wrapper">
           {
-            this.state.notePad.map((note) => {
-              return (
-                <div className={note.noteCategory} tabindex="0" key={note.id}>
-                  <h2>{note.noteTitle}</h2>
-                  <p>{note.noteContent}</p>
-                  <a href="#top">
-                    <button className="edit"
-                      onClick={() => this.editNote(note.noteCategory, note.noteTitle, note.noteContent, note.id)}>
-                      &#9998;
-                    </button>
-                  </a>
-                  <button className="delete" onClick={() => this.deleteNote(note.id)}>X</button>
-                </div>
-              )
-            })
+            <Notepad 
+              notePad = {this.state.notePad}
+              editNote = {this.editNote}
+              deleteNote = {this.deleteNote}
+            />
           }
         </main>
         <Footer />
@@ -178,7 +133,5 @@ class App extends Component {
     );
   }
 }
-
-
 
 export default App;
