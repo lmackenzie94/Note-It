@@ -38,7 +38,6 @@ p {
 header {
   background: black;
   padding: 10px 0;
-  /* margin-top: 20px; */
   box-shadow: 0 5px 5px #999;
   position: relative;
   top: 20px;
@@ -58,7 +57,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background:#d6ebff;
+  background:#ccfce5;
   /* border-top: 3px solid #000;
   border-bottom: 3px solid #000; */
   border-radius: 3px;
@@ -81,6 +80,7 @@ header {
 .inputs button:hover {
   box-shadow: none;
   transform: scale(.98);
+  background: #ffb596;
 }
 
 .inputs form > * {
@@ -131,11 +131,14 @@ main {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  padding-top: 20px;
+  border: 5px solid #000;
+  border-radius: 5px;
 }
 
 /* Post-it effect was adapted from: https://mentormate.com/blog/css-postit-note/ */
 main > div {
-  height: 200px;
+  height: 220px;
   width: 250px;
   margin: 0 10px 20px 10px;
   padding: 0px 10px 10px 10px;
@@ -163,26 +166,34 @@ main > div:after {
 
 main > div h2 {
   display: inline-block;
+  line-height: 1.1;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+main > div p {
+  line-height: 1.1;
+  font-size: 1.1rem;
 }
 
 .Personal {
   background: linear-gradient(135deg, #ffff88 81%,#ffff88  82%,#ffff88 82%,#ffffc6 100%);
-  border-top:60px solid #fdfd86;
+  border-top:30px solid #fdfd86;
 }
 
 .Work {
   background: linear-gradient(135deg, #affbff 81%,#affbff  82%,#affbff 82%,#c2f9fc 100%);
-  border-top:60px solid #aafaff;
+  border-top:30px solid #aafaff;
 }
 
 .Other {
   background: linear-gradient(135deg, #ffd5c9 81%,#ffd5c9  82%,#ffd5c9 82%,#ffe9e2 100%);
-  border-top:60px solid #ffd3c6;
+  border-top:30px solid #ffd3c6;
 }
 
 .delete {
   position: absolute;
-  top: -55px;
+  top: -25px;
   right: 0;
   color: #000;
   font-size: 1rem;
@@ -199,7 +210,7 @@ main > div h2 {
 
 .edit {
   position: absolute;
-  top: -55px;
+  top: -30px;
   left: 0;
   color: #000;
   font-size: 1.3rem;
