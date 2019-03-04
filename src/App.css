@@ -57,22 +57,19 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background:#ccfce5;
-  /* border-top: 3px solid #000;
-  border-bottom: 3px solid #000; */
+  background: #b3f0d3;
   border-radius: 3px;
-  width: 50%;
   margin: 50px auto;
   padding: 15px;
-  box-shadow: 5px 5px 5px #999;
+  box-shadow: 0 5px 5px #999;
 }
 
 .inputs button {
-  width: 30%;
+  width: 200px;
   padding: 5px;
   border: 1px solid #000;
   border-radius: 10px;
-  box-shadow: 3px 3px 3px #999;
+  box-shadow: 2px 2px 2px #999;
   background: #fff;
   transition: all .1s linear;
 }
@@ -109,7 +106,7 @@ header {
   margin: 15px 0;
   border: 2px solid transparent;
   border-radius: 3px;
-  width: 80%;
+  width: 500px;
 }
 
 .inputsSection {
@@ -133,7 +130,8 @@ main {
   flex-wrap: wrap;
   padding-top: 20px;
   border: 5px solid #000;
-  border-radius: 5px;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px #999;
 }
 
 /* Post-it effect was adapted from: https://mentormate.com/blog/css-postit-note/ */
@@ -167,8 +165,9 @@ main > div:after {
 main > div h2 {
   display: inline-block;
   line-height: 1.1;
-  font-size: 1.3rem;
+  font-size: 1rem;
   margin-bottom: 15px;
+  font-family: 'Roboto', sans-serif;
 }
 
 main > div p {
@@ -233,4 +232,39 @@ footer {
   background: #000;
   color: #999;
   margin-top: 30px;
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 600px) {
+
+  main > div {
+    height: 180px;
+    width: 200px;
+  }
+
+  main > div:after {
+    width: 150px;
+  }
+
+  .inputs textarea {
+    width: 80%;
+  }
+
+}
+
+@media (max-width: 450px) {
+
+  .inputsSection {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .inputsSection > select,
+  .inputsSection > input {
+    margin: 0 0 10px 0;
+    width: 90%;
+  }
+
+
 }

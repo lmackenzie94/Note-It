@@ -81,7 +81,7 @@ class App extends Component {
   }
 
   editNote = (currentNoteCategory, currentNoteTitle, currentNoteContent, currentNoteId) => {
-    alert('Please make necessary edits in the form');
+    alert('Entering edit mode - please make edits in the form');
 
     this.setState({
       noteCategory: currentNoteCategory,
@@ -102,6 +102,14 @@ class App extends Component {
       noteTitle: this.state.noteTitle,
       noteContent: this.state.noteContent
     });
+
+    this.setState({
+      noteContent: "",
+      noteTitle: "",
+      noteCategory: "Personal",
+      noteIdToEdit: "",
+      editMode: false
+    })
   }
 
   render() {
@@ -116,6 +124,7 @@ class App extends Component {
             noteCategory = {this.state.noteCategory}
             noteTitle = {this.state.noteTitle}
             noteContent = {this.state.noteContent}
+            editMode = {this.state.editMode}
           />
         </section>
 

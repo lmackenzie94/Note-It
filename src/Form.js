@@ -38,11 +38,10 @@ const Form = (props) => {
                 value={props.noteContent}
                 required>
             </textarea>
-
-            <button type="submit">Note-It!</button>
-            <button onClick={props.handleEditSubmit}>
-                Submit Edit</button>
-
+            
+            { props.editMode && <button onClick={props.handleEditSubmit}>Edit-It!</button> }
+            { props.editMode === false && <button type="submit">Note-It!</button> }
+            
         </form>
     )
 }
