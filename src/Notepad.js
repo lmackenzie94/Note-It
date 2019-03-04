@@ -1,6 +1,11 @@
 import React from 'react';
 
 const Notepad = (props) => {
+    if (props.notePad.length === 0) {
+        return (
+            <p className="noNotesMessage">You currently have no notes.</p>
+        )
+    }
     return (
         props.notePad.map((note) => {
             return (
