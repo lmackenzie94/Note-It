@@ -28,8 +28,6 @@ class App extends Component {
       const data = snapshot.val()
       const updateNotePad = []
 
-      console.log(data);
-
       for (let note in data) {
         updateNotePad.push({
           id: note,
@@ -37,7 +35,6 @@ class App extends Component {
           noteTitle: data[note].noteTitle,
           noteContent: data[note].noteContent
         })
-        console.log(updateNotePad)
       }
 
       this.setState({
@@ -68,7 +65,6 @@ class App extends Component {
   }
 
   handleChange = (e) => {
-    // console.log(e.target.value)
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -116,7 +112,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <section className="inputs" id="top">
+        <section className="inputs" id="main">
           <Form 
             handleSubmit = {this.handleSubmit}
             handleChange = {this.handleChange}

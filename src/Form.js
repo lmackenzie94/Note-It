@@ -33,14 +33,14 @@ const Form = (props) => {
                 id="noteContent"
                 placeholder="Write your note..."
                 cols="40"
-                rows="7"
+                rows="5"
                 onChange={props.handleChange}
                 value={props.noteContent}
                 required>
             </textarea>
             
             { props.editMode && <button onClick={props.handleEditSubmit}>Edit-It!</button> }
-            { props.editMode === false && <button type="submit">Note-It!</button> }
+            { props.editMode === false && <button type="submit" tabIndex="0">Note-It!</button> }
             
         </form>
     )
