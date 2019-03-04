@@ -1,5 +1,6 @@
 {
   "projects": {
-    "staging": "postit-c9b80"
+    "staging": "postit-c9b80",
+    "default": "postit-c9b80"
   }
 }
