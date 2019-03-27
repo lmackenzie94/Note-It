@@ -6,6 +6,9 @@ import Footer from './Footer';
 import Form from './Form';
 import Notepad from './Notepad';
 
+const provider = new firebase.auth.GoogleAuthProvider();
+const auth = firebase.auth();
+
 class App extends Component {
   
   constructor() {
@@ -16,7 +19,8 @@ class App extends Component {
       noteTitle: "",
       noteContent: "",
       editMode: false,
-      noteIdToEdit: ""
+      noteIdToEdit: "",
+      user: null
     }
   }
 
@@ -41,6 +45,12 @@ class App extends Component {
         notePad: updateNotePad
       })
     })
+
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user });
+      }
+    });
   }
 
   //FUNCTIONS
@@ -108,10 +118,33 @@ class App extends Component {
     })
   }
 
+  login = () => {
+    auth.signInWithPopup(provider)
+      .then(result => {
+        const user = result.user;
+        this.setState({
+          user
+        });
+      });
+  }
+
+  logout = () => {
+    auth.signOut()
+      .then(() => {
+        this.setState({
+          user: null
+        })
+      })
+  }
+
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header 
+          user = {this.state.user}
+          login = {this.login}
+          logout = {this.logout}
+        />
         <section className="inputs" id="main">
           <Form 
             handleSubmit = {this.handleSubmit}

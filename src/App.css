@@ -54,6 +54,24 @@ header {
   color: white;
 }
 
+.header button {
+  color: #fff;
+  background: none;
+  position: absolute;
+  top: 20px; 
+  right: 5%;
+  transition: all .3s ease;
+  font-size: .8rem;
+  padding: 3px 10px;
+}
+
+.header button:hover,
+.header button:focus {
+  background: #fff;
+  color: #000;
+}
+
+
 /* INPUTS SECTION STYLES */
 
 .inputs form {

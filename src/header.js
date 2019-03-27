@@ -1,9 +1,10 @@
 import React from 'react';
 
-const Header = () => {
+const Header = (props) => {
     return (
-        <header>
+        <header className="header">
             <h1 className="headerTitle">Note-It</h1>
+            {props.user ? <button onClick={props.logout}>Log Out</button> : <button onClick={props.login}>Log In</button>}
         </header>
     )
 }
