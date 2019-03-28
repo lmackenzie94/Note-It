@@ -26,10 +26,17 @@ class App extends Component {
 
   componentDidMount() {
 
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user: user.uid });
+      }
+    });
+
     const dbRef = firebase.database().ref('notes');
     dbRef.on('value', snapshot => {
 
-      const data = snapshot.val()
+      const data = snapshot.val()[this.state.user]
+      console.log(data)
       const updateNotePad = []
 
       for (let note in data) {
@@ -45,12 +52,6 @@ class App extends Component {
         notePad: updateNotePad
       })
     })
-
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ user });
-      }
-    });
   }
 
   //FUNCTIONS
@@ -58,7 +59,7 @@ class App extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const dbRef = firebase.database().ref('notes')
+    const dbRef = firebase.database().ref().child(this.state.user)
 
     dbRef.push({
       noteTitle: this.state.noteTitle,
@@ -81,7 +82,7 @@ class App extends Component {
   }
 
   deleteNote = (noteId) => {
-    const dbRef = firebase.database().ref('notes')
+    const dbRef = firebase.database().ref('notes').child(this.state.user)
     const noteToDelete = dbRef.child(noteId)
     noteToDelete.remove();
   }
@@ -100,7 +101,7 @@ class App extends Component {
 
   handleEditSubmit = (e) => {
     e.preventDefault();
-    const dbRef = firebase.database().ref('notes')
+    const dbRef = firebase.database().ref('notes').child(this.state.user)
     const noteToEdit = dbRef.child(this.state.noteIdToEdit)
 
     noteToEdit.set({
@@ -121,7 +122,7 @@ class App extends Component {
   login = () => {
     auth.signInWithPopup(provider)
       .then(result => {
-        const user = result.user;
+        const user = result.user
         this.setState({
           user
         });
